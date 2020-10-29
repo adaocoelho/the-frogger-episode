@@ -18,46 +18,15 @@ class Obstacle {
         } else {
             ctx.drawImage(car, 0, this.carType * this.height, grid * 2, grid, this.x, this.y, this.width, this.height);
         }
-
-
-
-        //colisão
-        
-       /*if (this.type === 'log'){
-            ctx2.fillRect(this.x, this.y, this.width, this.height);
-            ctx2.drawImage(kramer, 0, 0, 70, 70, this.x, this.y, this.width, this.height);
-           
-        }*/
-        
-           
-           
-           /* if (frame % this.random === 0) {
-
-
-               if (this.frameX >= 1) this.frameX = 0;
-                else this.frameX++;     
-            }
-          ctx5.drawImage(kramer, this.frameX * 70, this.frameY * 70, 70, 70, 
-            this.x, this.y, this.width, this.height);
-        } else if (thys.type === 'log'); {
-            ctx5.drawImage(log, this.x, this.y, this.width. this.height);
-
-        } else {
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.drawImage(car, 0, 0, gird * 2, grid, this.x, this.y, this.width, this.height);
-        } */
-        //ctx.fillStyle = 'blue';
-        //ctx.fillRect(this.x, this.y, this.width, this.height);
-        
     }
     update(){
-        this.x += this.speed * gameSpeed;
+        this.x += this.speed * gameSpeed; // atualização dos objectos que se movimentam para a borda direita não está a acontecer
         if (this.speed > 0) {
         if (this.x > canvas.width * this.width){ //reinciar após volta completa a width / x
             this.x = 0 - this.width;
             
         }
-    } else {
+    } else { //Velocidade é menor que zero e passou pela borda esquerda da ãrea do jogo! Passar a velocidade de todos os obstaculos para negativo.
         if (this.x < 0 - this.width) {
             this.x = canvas.width + this.width
             Math.floor(Math.random() * 30 + 30); // delay para surgir novamente
@@ -65,7 +34,7 @@ class Obstacle {
     }
     } 
 }
-   
+
 function initObstacles() { //  1
     for (let i = 0; i < 2; i++) {
         let x = i * 350; //distancia dos carros
@@ -93,7 +62,7 @@ function initObstacles() { //  1
 
 initObstacles();
 
-function handleObstacles() {
+function handleObstacles() { //ciclo de acção dos arrays. atualizar, desenhar, atualizar, desenhar...
     for (let i = 0; i < carsArray.length; i++){
         carsArray[i].update();
         carsArray[i].draw();
@@ -103,18 +72,19 @@ function handleObstacles() {
         logsArray[i].draw();
     }
 
-//colisão com carros
+//colisão com carros e log (bike)
 
     for (let i = 0; i < carsArray.length; i++){
         if (collision(frogger, carsArray[i])){
-            ctx4.drawImage(collisions, 0, 100, 100, 100, frogger.x, frogger.y, 50, 50);
+            ctx4.drawImage(collisions, 0, 100, 100, 100, frogger.x, frogger.y, 50, 50); //imagem explosão após colisão
             resetGame();
         }
     for (let i = 0; i <  logsArray.length; i++){
         if (collision(frogger, logsArray[i])){
-                ctx4.drawImage(collisions, 0, 100, 100, 100, frogger.x, frogger.y, 50, 50);
+                ctx4.drawImage(collisions, 0, 100, 100, 100, frogger.x, frogger.y, 50, 50); //imagem explosão após colisão
                 resetGame();
         } 
     } 
 }
 }
+

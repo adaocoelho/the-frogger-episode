@@ -31,7 +31,7 @@ function scored(){
     frogger.y = canvas.height - frogger.height - 40;
 
 }
-
+//configuração de Scores
 function handleScoreBoard(){
     ctx4.fillStyle = 'black';
     ctx4.strokeStyle = 'black';
@@ -44,7 +44,7 @@ function handleScoreBoard(){
     ctx4.strokeText('Game Speed: ' + gameSpeed.toFixed(1), 10, 60);
 }
 
-//colisão entre dois rectangulos
+//deteção de colisão entre dois rectangulos
 
 function collision(first, second){
     return !( first.x > second.x + second.width ||
@@ -53,10 +53,11 @@ function collision(first, second){
             first.y + first.height < second.y); //ALELUIA!
 }
 
-function resetGame() {
+function resetGame() { //após colisão player volta à posição inicial, score é zero, contagem de colisões fica a zero e velocidade do jogo volta a 1. 
     frogger.x = canvas.width/2 - frogger.width/2;
     frogger.y = canvas.height - frogger.height - 40;
     score = 0;
     collisionsCount++;
     gameSpeed = 1;
 }
+
