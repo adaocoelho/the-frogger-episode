@@ -9,7 +9,7 @@ function animate() {
 }
 animate();
 
-//Disparar frogger
+//Disparar frogger hhhhhh
 
 window.addEventListener('keydown', function(e){
     keys = [];
